@@ -1,0 +1,401 @@
+{
+  "@context": {
+    "@language": "pt",
+    "@vocab": "https://schema.org/",
+    "citeAs": "cr:citeAs",
+    "column": "cr:column",
+    "conformsTo": "dct:conformsTo",
+    "cr": "http://mlcommons.org/croissant/",
+    "data": {
+      "@id": "cr:data",
+      "@type": "@json"
+    },
+    "dataType": {
+      "@id": "cr:dataType",
+      "@type": "@vocab"
+    },
+    "dct": "http://purl.org/dc/terms/",
+    "examples": {
+      "@id": "cr:examples",
+      "@type": "@json"
+    },
+    "extract": "cr:extract",
+    "field": "cr:field",
+    "fileProperty": "cr:fileProperty",
+    "fileObject": "cr:fileObject",
+    "fileSet": "cr:fileSet",
+    "format": "cr:format",
+    "includes": "cr:includes",
+    "isLiveDataset": "cr:isLiveDataset",
+    "jsonPath": "cr:jsonPath",
+    "key": "cr:key",
+    "md5": "cr:md5",
+    "parentField": "cr:parentField",
+    "path": "cr:path",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "recordSet": "cr:recordSet",
+    "references": "cr:references",
+    "regex": "cr:regex",
+    "repeated": "cr:repeated",
+    "replace": "cr:replace",
+    "sc": "https://schema.org/",
+    "separator": "cr:separator",
+    "source": "cr:source",
+    "subField": "cr:subField",
+    "transform": "cr:transform",
+    "wd": "https://www.wikidata.org/wiki/"
+  },
+  "@type": "sc:Dataset",
+  "name": "AmazonDiseases-QA",
+  "conformsTo": "http://mlcommons.org/croissant/1.0",
+  "version": "1.0.0",
+  "datePublished": "2025-11-24",
+  "license": "Unknown (publicly available on Hugging Face)",
+  "description": "Question answering dataset about neglected tropical diseases in Portuguese. Contains questions and answers about diseases prevalent in the Amazon region in Brazil. This dataset was processed and standardized from the original corpus. This file contains only Croissant metadata; the preprocessed data is NOT distributed. Users must obtain the original version from Hugging Face and execute the provided preprocessing script.",
+  "url": "https://github.com/HAILab-PUCPR/clinicalbenchpt",
+  "citeAs": "Please cite the original author's work when using this dataset. When using the processed version, please also cite our work.",
+  "citation": "Please cite the original author's work when using this dataset. When using the processed version, please also cite our work.",
+  "keywords": [
+    "question answering",
+    "QA",
+    "neglected diseases",
+    "tropical diseases",
+    "healthcare",
+    "Brazilian Portuguese",
+    "NLP",
+    "medical QA"
+  ],
+  "distribution": [
+    {
+      "@type": "cr:FileObject",
+      "@id": "source-repository",
+      "name": "source-repository",
+      "description": "Original dataset repository on Hugging Face. Data must be downloaded from this source and processed using the provided scripts.",
+      "contentUrl": "https://huggingface.co/datasets/juniofreitas/dataset-chatbot-doencas_negligenciadas",
+      "encodingFormat": "application/json",
+      "sha256": "dummy"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "full.jsonl",
+      "name": "full.jsonl",
+      "contentUrl": "../benchmark/amazon_diseases/full.jsonl",
+      "encodingFormat": "application/jsonlines",
+      "description": "Split 'full' com 3158 registros.",
+      "sha256": "a4a2d4178828c245941a77707868d18aba2ea54bcb35263998ef1c72162f9f0d"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "train.jsonl",
+      "name": "train.jsonl",
+      "contentUrl": "../benchmark/amazon_diseases/train.jsonl",
+      "encodingFormat": "application/jsonlines",
+      "description": "Split 'train' com 2526 registros.",
+      "sha256": "13cc92b31635d4cdd05eb94c2be5c2f1057739caaaa507eb2c2b17dfff11a684"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "dev.jsonl",
+      "name": "dev.jsonl",
+      "contentUrl": "../benchmark/amazon_diseases/dev.jsonl",
+      "encodingFormat": "application/jsonlines",
+      "description": "Split 'dev' com 316 registros.",
+      "sha256": "79b6e2e863d7bb6bc42bf61c5e2e847e46e84ca0d8983bcfaa51e3d5047817df"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "test.jsonl",
+      "name": "test.jsonl",
+      "contentUrl": "../benchmark/amazon_diseases/test.jsonl",
+      "encodingFormat": "application/jsonlines",
+      "description": "Split 'test' com 316 registros.",
+      "sha256": "50076ee911894ed8f8681afeb7b8e2a9a3849d45ac8a44e445941256a35dbad3"
+    }
+  ],
+  "recordSet": [
+    {
+      "@type": "cr:RecordSet",
+      "@id": "questions",
+      "name": "questions",
+      "description": "Perguntas e respostas sobre doenças negligenciadas da Amazônia (completo).",
+      "key": {
+        "@id": "id"
+      },
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "questions/id",
+          "name": "id",
+          "description": "Identificador único",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "full.jsonl"
+            },
+            "extract": {
+              "column": "id"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "questions/question",
+          "name": "question",
+          "description": "Pergunta do usuário sobre doenças negligenciadas.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "full.jsonl"
+            },
+            "extract": {
+              "column": "question"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "questions/answer",
+          "name": "answer",
+          "description": "Resposta médica detalhada.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "full.jsonl"
+            },
+            "extract": {
+              "column": "answer"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "questions/task",
+          "name": "task",
+          "description": "Tipo de tarefa (qa).",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "full.jsonl"
+            },
+            "extract": {
+              "column": "task"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "@type": "cr:RecordSet",
+      "@id": "train",
+      "name": "train",
+      "description": "Conjunto de dados para o split 'train'.",
+      "key": {
+        "@id": "id"
+      },
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "train/id",
+          "name": "id",
+          "description": "Identificador único",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "train.jsonl"
+            },
+            "extract": {
+              "column": "id"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "train/question",
+          "name": "question",
+          "description": "Pergunta do usuário sobre doenças negligenciadas.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "train.jsonl"
+            },
+            "extract": {
+              "column": "question"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "train/answer",
+          "name": "answer",
+          "description": "Resposta médica detalhada.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "train.jsonl"
+            },
+            "extract": {
+              "column": "answer"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "train/task",
+          "name": "task",
+          "description": "Tipo de tarefa (qa).",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "train.jsonl"
+            },
+            "extract": {
+              "column": "task"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "@type": "cr:RecordSet",
+      "@id": "dev",
+      "name": "dev",
+      "description": "Conjunto de dados para o split 'dev'.",
+      "key": {
+        "@id": "id"
+      },
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "dev/id",
+          "name": "id",
+          "description": "Identificador único",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "dev.jsonl"
+            },
+            "extract": {
+              "column": "id"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "dev/question",
+          "name": "question",
+          "description": "Pergunta do usuário sobre doenças negligenciadas.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "dev.jsonl"
+            },
+            "extract": {
+              "column": "question"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "dev/answer",
+          "name": "answer",
+          "description": "Resposta médica detalhada.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "dev.jsonl"
+            },
+            "extract": {
+              "column": "answer"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "dev/task",
+          "name": "task",
+          "description": "Tipo de tarefa (qa).",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "dev.jsonl"
+            },
+            "extract": {
+              "column": "task"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "@type": "cr:RecordSet",
+      "@id": "test",
+      "name": "test",
+      "description": "Conjunto de dados para o split 'test'.",
+      "key": {
+        "@id": "id"
+      },
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "test/id",
+          "name": "id",
+          "description": "Identificador único",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "id"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "test/question",
+          "name": "question",
+          "description": "Pergunta do usuário sobre doenças negligenciadas.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "question"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "test/answer",
+          "name": "answer",
+          "description": "Resposta médica detalhada.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "answer"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "test/task",
+          "name": "task",
+          "description": "Tipo de tarefa (qa).",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "task"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

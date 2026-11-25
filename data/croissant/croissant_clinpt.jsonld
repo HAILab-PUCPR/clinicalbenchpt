@@ -1,0 +1,413 @@
+{
+  "@context": {
+    "@language": "pt",
+    "@vocab": "https://schema.org/",
+    "citeAs": "cr:citeAs",
+    "column": "cr:column",
+    "conformsTo": "dct:conformsTo",
+    "cr": "http://mlcommons.org/croissant/",
+    "data": {
+      "@id": "cr:data",
+      "@type": "@json"
+    },
+    "dataType": {
+      "@id": "cr:dataType",
+      "@type": "@vocab"
+    },
+    "dct": "http://purl.org/dc/terms/",
+    "examples": {
+      "@id": "cr:examples",
+      "@type": "@json"
+    },
+    "extract": "cr:extract",
+    "field": "cr:field",
+    "fileProperty": "cr:fileProperty",
+    "fileObject": "cr:fileObject",
+    "fileSet": "cr:fileSet",
+    "format": "cr:format",
+    "includes": "cr:includes",
+    "isLiveDataset": "cr:isLiveDataset",
+    "jsonPath": "cr:jsonPath",
+    "key": "cr:key",
+    "md5": "cr:md5",
+    "parentField": "cr:parentField",
+    "path": "cr:path",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "recordSet": "cr:recordSet",
+    "references": "cr:references",
+    "regex": "cr:regex",
+    "repeated": "cr:repeated",
+    "replace": "cr:replace",
+    "sc": "https://schema.org/",
+    "separator": "cr:separator",
+    "source": "cr:source",
+    "subField": "cr:subField",
+    "transform": "cr:transform",
+    "wd": "https://www.wikidata.org/wiki/"
+  },
+  "@type": "sc:Dataset",
+  "name": "PortugueseClinicalNER (aka ClinPT)",
+  "conformsTo": "http://mlcommons.org/croissant/1.0",
+  "version": "1.0.0",
+  "datePublished": "2025-11-24",
+  "license": "Unknown (publicly available on GitHub)",
+  "description": "Named Entity Recognition dataset for Portuguese clinical texts. Contains annotated clinical case reports with entities such as conditions, anatomical structures, procedures, medications, and temporal expressions. This dataset was processed and standardized from the original corpus. This file contains only Croissant metadata; the preprocessed data is NOT distributed. Users must obtain the original version from the repository and execute the provided preprocessing script.",
+  "url": "https://github.com/HAILab-PUCPR/clinicalbenchpt",
+  "citeAs": "Please cite the original authors' work when using this dataset (https://aclanthology.org/W19-5024/). When using the processed version, please also cite our work.",
+  "citation": "Please cite the original authors' work when using this dataset (https://aclanthology.org/W19-5024/). When using the processed version, please also cite our work.",
+  "keywords": [
+    "named entity recognition",
+    "NER",
+    "clinical",
+    "medical",
+    "healthcare",
+    "Portuguese",
+    "NLP",
+    "sequence labeling"
+  ],
+  "distribution": [
+    {
+      "@type": "cr:FileObject",
+      "@id": "source-repository",
+      "name": "source-repository",
+      "description": "Original dataset repository on GitHub. Data must be downloaded from this source and processed using the provided scripts.",
+      "contentUrl": "https://github.com/fabioacl/PortugueseClinicalNER",
+      "encodingFormat": "application/zip",
+      "sha256": "dummy"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "full.jsonl",
+      "name": "full.jsonl",
+      "contentUrl": "../benchmark/clinical_ner/full.jsonl",
+      "encodingFormat": "application/jsonlines",
+      "description": "Split 'full' com 281 registros.",
+      "sha256": "1a41d72479932730e2d3b7a808d2fb4ffc847e6a2efaed4df97f6cbff590b75a"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "train.jsonl",
+      "name": "train.jsonl",
+      "contentUrl": "../benchmark/clinical_ner/train.jsonl",
+      "encodingFormat": "application/jsonlines",
+      "description": "Split 'train' com 224 registros.",
+      "sha256": "305545309bfc8bfe93993b35b9bcba7ff6b2c3cd5d741828a9ff2aa8605ef958"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "dev.jsonl",
+      "name": "dev.jsonl",
+      "contentUrl": "../benchmark/clinical_ner/dev.jsonl",
+      "encodingFormat": "application/jsonlines",
+      "description": "Split 'dev' com 28 registros.",
+      "sha256": "b81645741dacd186daff01bb604940e8a39eeae517d221412b84912f008009a1"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "test.jsonl",
+      "name": "test.jsonl",
+      "contentUrl": "../benchmark/clinical_ner/test.jsonl",
+      "encodingFormat": "application/jsonlines",
+      "description": "Split 'test' com 29 registros.",
+      "sha256": "09ea11107d4b3c19494d497950fd59d026487e0dee24c9d12e89bd4952d68a67"
+    }
+  ],
+  "recordSet": [
+    {
+      "@type": "cr:RecordSet",
+      "@id": "ner-examples",
+      "name": "ner-examples",
+      "description": "Anotações de entidades clínicas nomeadas (completo).",
+      "key": {
+        "@id": "id"
+      },
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "ner-examples/id",
+          "name": "id",
+          "description": "Identificador único",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "full.jsonl"
+            },
+            "extract": {
+              "column": "id"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ner-examples/text",
+          "name": "text",
+          "description": "Texto do relatório clínico.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "full.jsonl"
+            },
+            "extract": {
+              "column": "text"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ner-examples/tags",
+          "name": "tags",
+          "description": "Anotações de entidades nomeadas por categoria.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "full.jsonl"
+            },
+            "extract": {
+              "column": "task"
+            },
+            "transform": {
+              "replace": "*/Please refer to the 'tags' field in the original dataset."
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ner-examples/task",
+          "name": "task",
+          "description": "Tipo de tarefa (ner).",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "full.jsonl"
+            },
+            "extract": {
+              "column": "task"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "@type": "cr:RecordSet",
+      "@id": "train",
+      "name": "train",
+      "description": "Conjunto de dados para o split 'train'.",
+      "key": {
+        "@id": "id"
+      },
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "train/id",
+          "name": "id",
+          "description": "Identificador único",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "train.jsonl"
+            },
+            "extract": {
+              "column": "id"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "train/text",
+          "name": "text",
+          "description": "Texto do relatório clínico.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "train.jsonl"
+            },
+            "extract": {
+              "column": "text"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "train/tags",
+          "name": "tags",
+          "description": "Anotações de entidades nomeadas por categoria.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "train.jsonl"
+            },
+            "extract": {
+              "column": "task"
+            },
+            "transform": {
+              "replace": "*/Please refer to the 'tags' field in the original dataset."
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "train/task",
+          "name": "task",
+          "description": "Tipo de tarefa (ner).",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "train.jsonl"
+            },
+            "extract": {
+              "column": "task"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "@type": "cr:RecordSet",
+      "@id": "dev",
+      "name": "dev",
+      "description": "Conjunto de dados para o split 'dev'.",
+      "key": {
+        "@id": "id"
+      },
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "dev/id",
+          "name": "id",
+          "description": "Identificador único",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "dev.jsonl"
+            },
+            "extract": {
+              "column": "id"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "dev/text",
+          "name": "text",
+          "description": "Texto do relatório clínico.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "dev.jsonl"
+            },
+            "extract": {
+              "column": "text"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "dev/tags",
+          "name": "tags",
+          "description": "Anotações de entidades nomeadas por categoria.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "dev.jsonl"
+            },
+            "extract": {
+              "column": "task"
+            },
+            "transform": {
+              "replace": "*/Please refer to the 'tags' field in the original dataset."
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "dev/task",
+          "name": "task",
+          "description": "Tipo de tarefa (ner).",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "dev.jsonl"
+            },
+            "extract": {
+              "column": "task"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "@type": "cr:RecordSet",
+      "@id": "test",
+      "name": "test",
+      "description": "Conjunto de dados para o split 'test'.",
+      "key": {
+        "@id": "id"
+      },
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "test/id",
+          "name": "id",
+          "description": "Identificador único",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "id"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "test/text",
+          "name": "text",
+          "description": "Texto do relatório clínico.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "text"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "test/tags",
+          "name": "tags",
+          "description": "Anotações de entidades nomeadas por categoria.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "task"
+            },
+            "transform": {
+              "replace": "*/Please refer to the 'tags' field in the original dataset."
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "test/task",
+          "name": "task",
+          "description": "Tipo de tarefa (ner).",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "task"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

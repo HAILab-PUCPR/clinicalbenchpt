@@ -1,0 +1,401 @@
+{
+  "@context": {
+    "@language": "pt",
+    "@vocab": "https://schema.org/",
+    "citeAs": "cr:citeAs",
+    "column": "cr:column",
+    "conformsTo": "dct:conformsTo",
+    "cr": "http://mlcommons.org/croissant/",
+    "data": {
+      "@id": "cr:data",
+      "@type": "@json"
+    },
+    "dataType": {
+      "@id": "cr:dataType",
+      "@type": "@vocab"
+    },
+    "dct": "http://purl.org/dc/terms/",
+    "examples": {
+      "@id": "cr:examples",
+      "@type": "@json"
+    },
+    "extract": "cr:extract",
+    "field": "cr:field",
+    "fileProperty": "cr:fileProperty",
+    "fileObject": "cr:fileObject",
+    "fileSet": "cr:fileSet",
+    "format": "cr:format",
+    "includes": "cr:includes",
+    "isLiveDataset": "cr:isLiveDataset",
+    "jsonPath": "cr:jsonPath",
+    "key": "cr:key",
+    "md5": "cr:md5",
+    "parentField": "cr:parentField",
+    "path": "cr:path",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "recordSet": "cr:recordSet",
+    "references": "cr:references",
+    "regex": "cr:regex",
+    "repeated": "cr:repeated",
+    "replace": "cr:replace",
+    "sc": "https://schema.org/",
+    "separator": "cr:separator",
+    "source": "cr:source",
+    "subField": "cr:subField",
+    "transform": "cr:transform",
+    "wd": "https://www.wikidata.org/wiki/"
+  },
+  "@type": "sc:Dataset",
+  "name": "FallDetection-FAL",
+  "conformsTo": "http://mlcommons.org/croissant/1.0",
+  "version": "1.0.0",
+  "datePublished": "2025-11-24",
+  "license": "AGPL-3.0",
+  "description": "Binary classification dataset for fall detection from Portuguese clinical evolution notes. Contains clinical notes from hospitalized patients, with labels indicating whether the patient experienced a fall during hospitalization. This is a critical patient safety task in healthcare settings. This dataset was processed and standardized from the original corpus. This file contains only Croissant metadata; the preprocessed data is NOT distributed. Users must obtain the original version from the repository and execute the provided preprocessing script.",
+  "url": "https://github.com/HAILab-PUCPR/clinicalbenchpt",
+  "citeAs": "Please cite the original authors' work when using this dataset (https://ieeexplore.ieee.org/document/8941806/). When using the processed version, please also cite our work.",
+  "citation": "Please cite the original authors' work when using this dataset (https://ieeexplore.ieee.org/document/8941806/). When using the processed version, please also cite our work.",
+  "keywords": [
+    "classification",
+    "fall detection",
+    "patient safety",
+    "clinical notes",
+    "Portuguese",
+    "NLP",
+    "medical informatics",
+    "hospital safety"
+  ],
+  "distribution": [
+    {
+      "@type": "cr:FileObject",
+      "@id": "source-repository",
+      "name": "source-repository",
+      "description": "Original dataset repository on GitHub. Data must be downloaded from this source and processed using the provided scripts.",
+      "contentUrl": "https://github.com/pln-pucrs/fall-detection",
+      "encodingFormat": "application/zip",
+      "sha256": "dummy"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "full.jsonl",
+      "name": "full.jsonl",
+      "contentUrl": "../benchmark/fall_detection/full.jsonl",
+      "encodingFormat": "application/jsonlines",
+      "description": "Split 'full' com 1020 registros.",
+      "sha256": "21f74f5427893540d5ba559a0bcafd7720112132996b2022bbd9428c4a1f26b2"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "train.jsonl",
+      "name": "train.jsonl",
+      "contentUrl": "../benchmark/fall_detection/train.jsonl",
+      "encodingFormat": "application/jsonlines",
+      "description": "Split 'train' com 816 registros.",
+      "sha256": "3487253b7747e152f92300b2ebd624e8a5ff0058bd5aae618217e02aa965c3ce"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "dev.jsonl",
+      "name": "dev.jsonl",
+      "contentUrl": "../benchmark/fall_detection/dev.jsonl",
+      "encodingFormat": "application/jsonlines",
+      "description": "Split 'dev' com 102 registros.",
+      "sha256": "1296f43efb14ba5112c3e189263a9ddd14a0cfaf3604511068389fead0f96e4c"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "test.jsonl",
+      "name": "test.jsonl",
+      "contentUrl": "../benchmark/fall_detection/test.jsonl",
+      "encodingFormat": "application/jsonlines",
+      "description": "Split 'test' com 102 registros.",
+      "sha256": "16c97b1ae4e601141257aa8be9558a67a70af8b5e00a227ebcedfded6bdb7802"
+    }
+  ],
+  "recordSet": [
+    {
+      "@type": "cr:RecordSet",
+      "@id": "classification-examples",
+      "name": "classification-examples",
+      "description": "Classificação clínica de risco/ocorrência de quedas (completo).",
+      "key": {
+        "@id": "id"
+      },
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "classification-examples/id",
+          "name": "id",
+          "description": "Identificador do registro",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "full.jsonl"
+            },
+            "extract": {
+              "column": "id"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "classification-examples/Evolucao",
+          "name": "Evolucao",
+          "description": "Texto da evolução médica/enfermagem",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "full.jsonl"
+            },
+            "extract": {
+              "column": "Evolucao"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "classification-examples/Target",
+          "name": "Target",
+          "description": "Rótulo de classe de queda (0 ou 1)",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "full.jsonl"
+            },
+            "extract": {
+              "column": "Target"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "classification-examples/task",
+          "name": "task",
+          "description": "Tipo de tarefa (classification).",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "full.jsonl"
+            },
+            "extract": {
+              "column": "task"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "@type": "cr:RecordSet",
+      "@id": "train",
+      "name": "train",
+      "description": "Conjunto de dados para o split 'train'.",
+      "key": {
+        "@id": "id"
+      },
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "train/id",
+          "name": "id",
+          "description": "Identificador do registro",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "train.jsonl"
+            },
+            "extract": {
+              "column": "id"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "train/Evolucao",
+          "name": "Evolucao",
+          "description": "Texto da evolução médica/enfermagem",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "train.jsonl"
+            },
+            "extract": {
+              "column": "Evolucao"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "train/Target",
+          "name": "Target",
+          "description": "Rótulo de classe de queda (0 ou 1)",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "train.jsonl"
+            },
+            "extract": {
+              "column": "Target"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "train/task",
+          "name": "task",
+          "description": "Tipo de tarefa (classification).",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "train.jsonl"
+            },
+            "extract": {
+              "column": "task"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "@type": "cr:RecordSet",
+      "@id": "dev",
+      "name": "dev",
+      "description": "Conjunto de dados para o split 'dev'.",
+      "key": {
+        "@id": "id"
+      },
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "dev/id",
+          "name": "id",
+          "description": "Identificador do registro",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "dev.jsonl"
+            },
+            "extract": {
+              "column": "id"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "dev/Evolucao",
+          "name": "Evolucao",
+          "description": "Texto da evolução médica/enfermagem",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "dev.jsonl"
+            },
+            "extract": {
+              "column": "Evolucao"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "dev/Target",
+          "name": "Target",
+          "description": "Rótulo de classe de queda (0 ou 1)",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "dev.jsonl"
+            },
+            "extract": {
+              "column": "Target"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "dev/task",
+          "name": "task",
+          "description": "Tipo de tarefa (classification).",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "dev.jsonl"
+            },
+            "extract": {
+              "column": "task"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "@type": "cr:RecordSet",
+      "@id": "test",
+      "name": "test",
+      "description": "Conjunto de dados para o split 'test'.",
+      "key": {
+        "@id": "id"
+      },
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "test/id",
+          "name": "id",
+          "description": "Identificador do registro",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "id"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "test/Evolucao",
+          "name": "Evolucao",
+          "description": "Texto da evolução médica/enfermagem",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "Evolucao"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "test/Target",
+          "name": "Target",
+          "description": "Rótulo de classe de queda (0 ou 1)",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "Target"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "test/task",
+          "name": "task",
+          "description": "Tipo de tarefa (classification).",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "task"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

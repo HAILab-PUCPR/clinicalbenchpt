@@ -1,0 +1,400 @@
+{
+  "@context": {
+    "@language": "pt",
+    "@vocab": "https://schema.org/",
+    "citeAs": "cr:citeAs",
+    "column": "cr:column",
+    "conformsTo": "dct:conformsTo",
+    "cr": "http://mlcommons.org/croissant/",
+    "data": {
+      "@id": "cr:data",
+      "@type": "@json"
+    },
+    "dataType": {
+      "@id": "cr:dataType",
+      "@type": "@vocab"
+    },
+    "dct": "http://purl.org/dc/terms/",
+    "examples": {
+      "@id": "cr:examples",
+      "@type": "@json"
+    },
+    "extract": "cr:extract",
+    "field": "cr:field",
+    "fileProperty": "cr:fileProperty",
+    "fileObject": "cr:fileObject",
+    "fileSet": "cr:fileSet",
+    "format": "cr:format",
+    "includes": "cr:includes",
+    "isLiveDataset": "cr:isLiveDataset",
+    "jsonPath": "cr:jsonPath",
+    "key": "cr:key",
+    "md5": "cr:md5",
+    "parentField": "cr:parentField",
+    "path": "cr:path",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "recordSet": "cr:recordSet",
+    "references": "cr:references",
+    "regex": "cr:regex",
+    "repeated": "cr:repeated",
+    "replace": "cr:replace",
+    "sc": "https://schema.org/",
+    "separator": "cr:separator",
+    "source": "cr:source",
+    "subField": "cr:subField",
+    "transform": "cr:transform",
+    "wd": "https://www.wikidata.org/wiki/"
+  },
+  "@type": "sc:Dataset",
+  "name": "MultiClinSum-PT",
+  "conformsTo": "http://mlcommons.org/croissant/1.0",
+  "version": "1.0.0",
+  "datePublished": "2025-11-24",
+  "license": "CC-BY-4.0",
+  "description": "Clinical text summarization dataset in Portuguese. Contains detailed clinical case reports paired with concise summaries. Each example includes a comprehensive clinical narrative (patient history, symptoms, examinations, diagnoses, treatments, and outcomes) along with a gold-standard summary highlighting the key clinical information. This dataset was processed and standardized from the original corpus. This file contains only Croissant metadata; the preprocessed data is NOT distributed. Users must obtain the original version from Zenodo and execute the provided preprocessing script.",
+  "url": "https://github.com/HAILab-PUCPR/clinicalbenchpt",
+  "citeAs": "Please cite the original authors' work when using this dataset (https://ceur-ws.org/Vol-4038/paper_2.pdf). When using the processed version, please also cite our work.",
+  "citation": "Please cite the original authors' work when using this dataset (https://ceur-ws.org/Vol-4038/paper_2.pdf). When using the processed version, please also cite our work.",
+  "keywords": [
+    "summarization",
+    "clinical cases",
+    "medical",
+    "healthcare",
+    "Portuguese",
+    "NLP",
+    "text generation"
+  ],
+  "distribution": [
+    {
+      "@type": "cr:FileObject",
+      "@id": "source-repository",
+      "name": "source-repository",
+      "description": "Original dataset repository on Zenodo. Data must be downloaded from this source and processed using the provided scripts.",
+      "contentUrl": "https://zenodo.org/records/15459174",
+      "encodingFormat": "application/zip",
+      "sha256": "dummy"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "full.jsonl",
+      "name": "full.jsonl",
+      "contentUrl": "../benchmark/multiclinsum_pt/full.jsonl",
+      "encodingFormat": "application/jsonlines",
+      "description": "Split 'full' com 592 registros.",
+      "sha256": "f2b30e7355d21ae50fe5cc564a83f149377f8c739a389b8805ab6f20341f9018"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "train.jsonl",
+      "name": "train.jsonl",
+      "contentUrl": "../benchmark/multiclinsum_pt/train.jsonl",
+      "encodingFormat": "application/jsonlines",
+      "description": "Split 'train' com 473 registros.",
+      "sha256": "f6c099296c1821bb4d8a72aa084ae8d041705a59c9e44b54b88be63a5b3edf88"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "dev.jsonl",
+      "name": "dev.jsonl",
+      "contentUrl": "../benchmark/multiclinsum_pt/dev.jsonl",
+      "encodingFormat": "application/jsonlines",
+      "description": "Split 'dev' com 59 registros.",
+      "sha256": "2f2b868657fc1d31d7e205bd90132db5c9e990c338b2462efd533103b3df8a0a"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "test.jsonl",
+      "name": "test.jsonl",
+      "contentUrl": "../benchmark/multiclinsum_pt/test.jsonl",
+      "encodingFormat": "application/jsonlines",
+      "description": "Split 'test' com 60 registros.",
+      "sha256": "87a1c6448371bc84687b168e6f9e22c5bcc58f61021d998fbe0c7135375ca983"
+    }
+  ],
+  "recordSet": [
+    {
+      "@type": "cr:RecordSet",
+      "@id": "summarization-examples",
+      "name": "summarization-examples",
+      "description": "Sumarização de prontuários clínicos em português (completo).",
+      "key": {
+        "@id": "id"
+      },
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "summarization-examples/id",
+          "name": "id",
+          "description": "Identificador único",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "full.jsonl"
+            },
+            "extract": {
+              "column": "id"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "summarization-examples/text",
+          "name": "text",
+          "description": "Texto completo do caso clínico",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "full.jsonl"
+            },
+            "extract": {
+              "column": "text"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "summarization-examples/summary",
+          "name": "summary",
+          "description": "Sumário clínico de referência",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "full.jsonl"
+            },
+            "extract": {
+              "column": "summary"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "summarization-examples/task",
+          "name": "task",
+          "description": "Tipo de tarefa (summarization).",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "full.jsonl"
+            },
+            "extract": {
+              "column": "task"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "@type": "cr:RecordSet",
+      "@id": "train",
+      "name": "train",
+      "description": "Conjunto de dados para o split 'train'.",
+      "key": {
+        "@id": "id"
+      },
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "train/id",
+          "name": "id",
+          "description": "Identificador único",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "train.jsonl"
+            },
+            "extract": {
+              "column": "id"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "train/text",
+          "name": "text",
+          "description": "Texto completo do caso clínico",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "train.jsonl"
+            },
+            "extract": {
+              "column": "text"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "train/summary",
+          "name": "summary",
+          "description": "Sumário clínico de referência",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "train.jsonl"
+            },
+            "extract": {
+              "column": "summary"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "train/task",
+          "name": "task",
+          "description": "Tipo de tarefa (summarization).",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "train.jsonl"
+            },
+            "extract": {
+              "column": "task"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "@type": "cr:RecordSet",
+      "@id": "dev",
+      "name": "dev",
+      "description": "Conjunto de dados para o split 'dev'.",
+      "key": {
+        "@id": "id"
+      },
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "dev/id",
+          "name": "id",
+          "description": "Identificador único",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "dev.jsonl"
+            },
+            "extract": {
+              "column": "id"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "dev/text",
+          "name": "text",
+          "description": "Texto completo do caso clínico",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "dev.jsonl"
+            },
+            "extract": {
+              "column": "text"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "dev/summary",
+          "name": "summary",
+          "description": "Sumário clínico de referência",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "dev.jsonl"
+            },
+            "extract": {
+              "column": "summary"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "dev/task",
+          "name": "task",
+          "description": "Tipo de tarefa (summarization).",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "dev.jsonl"
+            },
+            "extract": {
+              "column": "task"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "@type": "cr:RecordSet",
+      "@id": "test",
+      "name": "test",
+      "description": "Conjunto de dados para o split 'test'.",
+      "key": {
+        "@id": "id"
+      },
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "test/id",
+          "name": "id",
+          "description": "Identificador único",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "id"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "test/text",
+          "name": "text",
+          "description": "Texto completo do caso clínico",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "text"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "test/summary",
+          "name": "summary",
+          "description": "Sumário clínico de referência",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "summary"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "test/task",
+          "name": "task",
+          "description": "Tipo de tarefa (summarization).",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "task"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,833 @@
+{
+  "@context": {
+    "@language": "pt",
+    "@vocab": "https://schema.org/",
+    "citeAs": "cr:citeAs",
+    "column": "cr:column",
+    "conformsTo": "dct:conformsTo",
+    "cr": "http://mlcommons.org/croissant/",
+    "data": {
+      "@id": "cr:data",
+      "@type": "@json"
+    },
+    "dataType": {
+      "@id": "cr:dataType",
+      "@type": "@vocab"
+    },
+    "dct": "http://purl.org/dc/terms/",
+    "examples": {
+      "@id": "cr:examples",
+      "@type": "@json"
+    },
+    "extract": "cr:extract",
+    "field": "cr:field",
+    "fileProperty": "cr:fileProperty",
+    "fileObject": "cr:fileObject",
+    "fileSet": "cr:fileSet",
+    "format": "cr:format",
+    "includes": "cr:includes",
+    "isLiveDataset": "cr:isLiveDataset",
+    "jsonPath": "cr:jsonPath",
+    "key": "cr:key",
+    "md5": "cr:md5",
+    "parentField": "cr:parentField",
+    "path": "cr:path",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "recordSet": "cr:recordSet",
+    "references": "cr:references",
+    "regex": "cr:regex",
+    "repeated": "cr:repeated",
+    "replace": "cr:replace",
+    "sc": "https://schema.org/",
+    "separator": "cr:separator",
+    "source": "cr:source",
+    "subField": "cr:subField",
+    "transform": "cr:transform",
+    "wd": "https://www.wikidata.org/wiki/"
+  },
+  "@type": "sc:Dataset",
+  "name": "DrBodeBench-DRB",
+  "conformsTo": "http://mlcommons.org/croissant/1.0",
+  "version": "1.0.0",
+  "datePublished": "2025-11-24",
+  "license": "Apache-2.0",
+  "description": "Multiple-choice medical examination dataset in Portuguese. Contains clinical case scenarios with multiple-choice questions primarily from Brazilian medical licensing exams. Each question presents a clinical situation and requires selecting the most appropriate medical conduct or diagnosis. This dataset was processed and standardized from the original corpus. This file contains only Croissant metadata; the preprocessed data is NOT distributed. Users must obtain the original version from Hugging Face and execute the provided preprocessing script.",
+  "url": "https://github.com/HAILab-PUCPR/clinicalbenchpt",
+  "citeAs": "Please cite the original authors' work when using this dataset (https://ieeexplore.ieee.org/abstract/document/11058810). When using the processed version, please also cite our work.",
+  "citation": "Please cite the original authors' work when using this dataset (https://ieeexplore.ieee.org/abstract/document/11058810). When using the processed version, please also cite our work.",
+  "keywords": [
+    "multiple choice",
+    "medical examination",
+    "clinical reasoning",
+    "medical education",
+    "Portuguese",
+    "NLP",
+    "INEP",
+    "medical licensing"
+  ],
+  "distribution": [
+    {
+      "@type": "cr:FileObject",
+      "@id": "source-repository",
+      "name": "source-repository",
+      "description": "Original dataset repository on Hugging Face. Data must be downloaded from this source and processed using the provided scripts.",
+      "contentUrl": "https://huggingface.co/datasets/recogna-nlp/drbodebench",
+      "encodingFormat": "application/json",
+      "sha256": "dummy"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "full.jsonl",
+      "name": "full.jsonl",
+      "contentUrl": "../benchmark/drbodebench/full.jsonl",
+      "encodingFormat": "application/jsonlines",
+      "description": "Split 'full' com 1598 registros.",
+      "sha256": "2bd16d1d1f3a8e923c2b9c03d310c66b8b3c7018de186d61bfb947b492de5a78"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "train.jsonl",
+      "name": "train.jsonl",
+      "contentUrl": "../benchmark/drbodebench/train.jsonl",
+      "encodingFormat": "application/jsonlines",
+      "description": "Split 'train' com 1282 registros.",
+      "sha256": "22bce1289fc6c44bb48f61b48f148397aa8296b90dea24ac1b0856fc33c03d55"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "dev.jsonl",
+      "name": "dev.jsonl",
+      "contentUrl": "../benchmark/drbodebench/dev.jsonl",
+      "encodingFormat": "application/jsonlines",
+      "description": "Split 'dev' com 158 registros.",
+      "sha256": "3823e13fa4489c6e29a279085c3c596955536f669be42382dee8eff7df3660c3"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "test.jsonl",
+      "name": "test.jsonl",
+      "contentUrl": "../benchmark/drbodebench/test.jsonl",
+      "encodingFormat": "application/jsonlines",
+      "description": "Split 'test' com 158 registros.",
+      "sha256": "50730b0c2f959b9a26d6e109b0dd6ff047f6dfd16df8ed105cb357d96f901389"
+    }
+  ],
+  "recordSet": [
+    {
+      "@type": "cr:RecordSet",
+      "@id": "multiple-choice-examples",
+      "name": "multiple-choice-examples",
+      "description": "Questões de múltipla escolha para exames médicos (completo).",
+      "key": {
+        "@id": "id"
+      },
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "multiple-choice-examples/id",
+          "name": "id",
+          "description": "Identificador único da questão",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "full.jsonl"
+            },
+            "extract": {
+              "column": "id"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "multiple-choice-examples/origem",
+          "name": "origem",
+          "description": "Instituição de origem da prova",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "full.jsonl"
+            },
+            "extract": {
+              "column": "origem"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "multiple-choice-examples/prova",
+          "name": "prova",
+          "description": "Ano da prova",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "full.jsonl"
+            },
+            "extract": {
+              "column": "prova"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "multiple-choice-examples/numero",
+          "name": "numero",
+          "description": "Número da questão na prova",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "full.jsonl"
+            },
+            "extract": {
+              "column": "numero"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "multiple-choice-examples/enunciado",
+          "name": "enunciado",
+          "description": "Enunciado da questão",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "full.jsonl"
+            },
+            "extract": {
+              "column": "enunciado"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "multiple-choice-examples/alternativas",
+          "name": "alternativas",
+          "description": "Dicionário de alternativas de múltipla escolha.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "full.jsonl"
+            },
+            "extract": {
+              "column": "task"
+            },
+            "transform": {
+              "replace": "*/Please refer to the 'alternativas' field in the original dataset."
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "multiple-choice-examples/resposta",
+          "name": "resposta",
+          "description": "Alternativa correta (gabarito)",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "full.jsonl"
+            },
+            "extract": {
+              "column": "resposta"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "multiple-choice-examples/contains_img",
+          "name": "contains_img",
+          "description": "Se a questão contém imagem associada",
+          "dataType": "sc:Boolean",
+          "source": {
+            "fileObject": {
+              "@id": "full.jsonl"
+            },
+            "extract": {
+              "column": "contains_img"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "multiple-choice-examples/img_path",
+          "name": "img_path",
+          "description": "Caminho da imagem se houver",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "full.jsonl"
+            },
+            "extract": {
+              "column": "img_path"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "multiple-choice-examples/img_description",
+          "name": "img_description",
+          "description": "Descrição da imagem se houver",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "full.jsonl"
+            },
+            "extract": {
+              "column": "img_description"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "multiple-choice-examples/task",
+          "name": "task",
+          "description": "Tipo de tarefa (multiple_choice).",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "full.jsonl"
+            },
+            "extract": {
+              "column": "task"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "@type": "cr:RecordSet",
+      "@id": "train",
+      "name": "train",
+      "description": "Conjunto de dados para o split 'train'.",
+      "key": {
+        "@id": "id"
+      },
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "train/id",
+          "name": "id",
+          "description": "Identificador único da questão",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "train.jsonl"
+            },
+            "extract": {
+              "column": "id"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "train/origem",
+          "name": "origem",
+          "description": "Instituição de origem da prova",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "train.jsonl"
+            },
+            "extract": {
+              "column": "origem"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "train/prova",
+          "name": "prova",
+          "description": "Ano da prova",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "train.jsonl"
+            },
+            "extract": {
+              "column": "prova"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "train/numero",
+          "name": "numero",
+          "description": "Número da questão na prova",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "train.jsonl"
+            },
+            "extract": {
+              "column": "numero"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "train/enunciado",
+          "name": "enunciado",
+          "description": "Enunciado da questão",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "train.jsonl"
+            },
+            "extract": {
+              "column": "enunciado"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "train/alternativas",
+          "name": "alternativas",
+          "description": "Dicionário de alternativas de múltipla escolha.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "train.jsonl"
+            },
+            "extract": {
+              "column": "task"
+            },
+            "transform": {
+              "replace": "*/Please refer to the 'alternativas' field in the original dataset."
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "train/resposta",
+          "name": "resposta",
+          "description": "Alternativa correta (gabarito)",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "train.jsonl"
+            },
+            "extract": {
+              "column": "resposta"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "train/contains_img",
+          "name": "contains_img",
+          "description": "Se a questão contém imagem associada",
+          "dataType": "sc:Boolean",
+          "source": {
+            "fileObject": {
+              "@id": "train.jsonl"
+            },
+            "extract": {
+              "column": "contains_img"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "train/img_path",
+          "name": "img_path",
+          "description": "Caminho da imagem se houver",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "train.jsonl"
+            },
+            "extract": {
+              "column": "img_path"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "train/img_description",
+          "name": "img_description",
+          "description": "Descrição da imagem se houver",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "train.jsonl"
+            },
+            "extract": {
+              "column": "img_description"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "train/task",
+          "name": "task",
+          "description": "Tipo de tarefa (multiple_choice).",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "train.jsonl"
+            },
+            "extract": {
+              "column": "task"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "@type": "cr:RecordSet",
+      "@id": "dev",
+      "name": "dev",
+      "description": "Conjunto de dados para o split 'dev'.",
+      "key": {
+        "@id": "id"
+      },
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "dev/id",
+          "name": "id",
+          "description": "Identificador único da questão",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "dev.jsonl"
+            },
+            "extract": {
+              "column": "id"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "dev/origem",
+          "name": "origem",
+          "description": "Instituição de origem da prova",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "dev.jsonl"
+            },
+            "extract": {
+              "column": "origem"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "dev/prova",
+          "name": "prova",
+          "description": "Ano da prova",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "dev.jsonl"
+            },
+            "extract": {
+              "column": "prova"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "dev/numero",
+          "name": "numero",
+          "description": "Número da questão na prova",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "dev.jsonl"
+            },
+            "extract": {
+              "column": "numero"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "dev/enunciado",
+          "name": "enunciado",
+          "description": "Enunciado da questão",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "dev.jsonl"
+            },
+            "extract": {
+              "column": "enunciado"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "dev/alternativas",
+          "name": "alternativas",
+          "description": "Dicionário de alternativas de múltipla escolha.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "dev.jsonl"
+            },
+            "extract": {
+              "column": "task"
+            },
+            "transform": {
+              "replace": "*/Please refer to the 'alternativas' field in the original dataset."
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "dev/resposta",
+          "name": "resposta",
+          "description": "Alternativa correta (gabarito)",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "dev.jsonl"
+            },
+            "extract": {
+              "column": "resposta"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "dev/contains_img",
+          "name": "contains_img",
+          "description": "Se a questão contém imagem associada",
+          "dataType": "sc:Boolean",
+          "source": {
+            "fileObject": {
+              "@id": "dev.jsonl"
+            },
+            "extract": {
+              "column": "contains_img"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "dev/img_path",
+          "name": "img_path",
+          "description": "Caminho da imagem se houver",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "dev.jsonl"
+            },
+            "extract": {
+              "column": "img_path"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "dev/img_description",
+          "name": "img_description",
+          "description": "Descrição da imagem se houver",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "dev.jsonl"
+            },
+            "extract": {
+              "column": "img_description"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "dev/task",
+          "name": "task",
+          "description": "Tipo de tarefa (multiple_choice).",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "dev.jsonl"
+            },
+            "extract": {
+              "column": "task"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "@type": "cr:RecordSet",
+      "@id": "test",
+      "name": "test",
+      "description": "Conjunto de dados para o split 'test'.",
+      "key": {
+        "@id": "id"
+      },
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "test/id",
+          "name": "id",
+          "description": "Identificador único da questão",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "id"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "test/origem",
+          "name": "origem",
+          "description": "Instituição de origem da prova",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "origem"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "test/prova",
+          "name": "prova",
+          "description": "Ano da prova",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "prova"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "test/numero",
+          "name": "numero",
+          "description": "Número da questão na prova",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "numero"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "test/enunciado",
+          "name": "enunciado",
+          "description": "Enunciado da questão",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "enunciado"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "test/alternativas",
+          "name": "alternativas",
+          "description": "Dicionário de alternativas de múltipla escolha.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "task"
+            },
+            "transform": {
+              "replace": "*/Please refer to the 'alternativas' field in the original dataset."
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "test/resposta",
+          "name": "resposta",
+          "description": "Alternativa correta (gabarito)",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "resposta"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "test/contains_img",
+          "name": "contains_img",
+          "description": "Se a questão contém imagem associada",
+          "dataType": "sc:Boolean",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "contains_img"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "test/img_path",
+          "name": "img_path",
+          "description": "Caminho da imagem se houver",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "img_path"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "test/img_description",
+          "name": "img_description",
+          "description": "Descrição da imagem se houver",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "img_description"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "test/task",
+          "name": "task",
+          "description": "Tipo de tarefa (multiple_choice).",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "task"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
