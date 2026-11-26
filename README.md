@@ -71,7 +71,7 @@ Instead, you must download or clone each dataset manually following the instruct
 
 After downloading, place the required files or folders inside:
 
-`../data/raw/`
+`data/raw/`
 
 ## 🥐 Croissant Metadata
 
